@@ -16,31 +16,30 @@ permissions:
 
 jobs:
   template_validation_job:
-      runs-on: windows-latest
-      name: template validation
-      steps:
-        - uses: actions/checkout@v4
+    runs-on: windows-latest
+    name: template validation
+    steps:
+      - uses: actions/checkout@v4
 
-        - uses: microsoft/template-validation-action@Latest
-          id: validation
-          with: 
-            useDevContainer: false
-          env:
-            TEMPLATE_VALIDATION_MODE: true
-            RUN_LOAD_DATA: false
-            AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
-            AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
-            AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
-            AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
-            AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-        - name: print result
-          run: cat ${{ steps.validation.outputs.resultFile }}
+      - uses: microsoft/template-validation-action@Latest
+        id: validation
+        with:
+          useDevContainer: false
+        env:
+          TEMPLATE_VALIDATION_MODE: true
+          RUN_LOAD_DATA: false
+          AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+          AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     runs-on: ubuntu-latest
     env:
+      TEMPLATE_VALIDATION_MODE: true
+      RUN_LOAD_DATA: false
       AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
@@ -78,11 +77,4 @@ jobs:
             --federated-credential-provider "github" `
             --tenant-id "$Env:AZURE_TENANT_ID"
         shell: pwsh
-
-
-      - name: Provision Infrastructure
-        run: azd provision --no-prompt
-
-      - name: Deploy Application
-        run: azd deploy --no-prompt
         
