@@ -244,6 +244,16 @@ var projectPrincipalId = !empty(azureExistingAIProjectResourceId)
   ? existingProjectResource.identity.principalId
   : ai!.outputs.aiProjectPrincipalId
 
+module projectRoleAcrPull  'core/security/role.bicep' = {
+name: 'project-role-acr-pull'
+scope: rg
+params: {
+  principalType: 'ServicePrincipal'
+  principalId: projectPrincipalId
+  roleDefinitionId: '7f951dda-4ed3-4680-a7ca-43fe172d538d'
+}
+}
+
 module projectRoleAzureAIUser  'core/security/role.bicep' = {
   name: 'project-role-azure-ai-user'
   scope: rg
@@ -338,4 +348,6 @@ output AZURE_AI_AGENT_NAME string = agentName
 output AZURE_OPENAI_ENDPOINT string = aoaiEndpoint
 output ENABLE_AZURE_MONITOR_TRACING bool = enableAzureMonitorTracing
 output AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED bool = azureTracingGenAIContentRecordingEnabled
-output AZURE_ACR_LOGIN_SERVER string = acrLoginServer
+output AZURE_CONTAINER_REGISTRY_ENDPOINT string = acrLoginServer
+output AI_FOUNDRY_PROJECT_RESOURCE_ID string = projectResourceId
+output AZURE_AI_PROJECT_ENDPOINT string = projectEndpoint
