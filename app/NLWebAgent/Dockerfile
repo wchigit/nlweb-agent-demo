@@ -19,9 +19,7 @@ WORKDIR /app
 
 # Copy requirements file
 COPY requirements.txt .
-COPY wheels/ wheels/
 
-RUN pip install --no-cache-dir ./wheels/azure_ai_agentshosting-0.0.1+g407f536.d251024-py3-none-any.whl[langgraph]
 # Install Python packages
 RUN pip install --no-cache-dir -r requirements.txt
 
