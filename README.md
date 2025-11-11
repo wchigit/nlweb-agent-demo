@@ -2,11 +2,22 @@
 
 The agent leverages the Azure AI Agent service and enable NLWeb as MCP endpoint.
 
-[**SOLUTION OVERVIEW**](#solution-overview) \| [**GETTING STARTED**](#getting-started) \| [**LOCAL DEVELOPMENT**](#local-development) \| [**RESOURCE CLEAN-UP**](#resource-clean-up) \| [**GUIDANCE**](#guidance) \| [**TROUBLESHOOTING**](#troubleshooting)
+[**FEATRURES**](#Features) \| [**GETTING STARTED**](#getting-started) \| [**LOCAL DEVELOPMENT**](#local-development) \| [**RESOURCE CLEAN-UP**](#resource-clean-up) \| [**GUIDANCE**](#guidance) \| [**TROUBLESHOOTING**](#troubleshooting)
 
-## Solution Overview
+## Important Security Notice
 
-This solution deploys a web-based NLWeb chat application with an AI agent running in Azure Container App.
+This template, the application code and configuration it contains, has been built to showcase Microsoft Azure specific services and tools. We strongly advise our customers not to make this code part of their production environments without implementing or enabling additional security features.
+
+## Features
+
+This project framework provides the following features:
+
+* **Azure AI Foundry Project**: Complete setup of Azure AI Foundry workspace with project configuration
+* **Foundry Model Deployments**: Automatic deployment of AI models for agent capabilities
+* **Container-Based Agent Hosting**: NLWeb application as Foundry hosted agent for deploying and scaling AI agents
+* **Azure Container Registry**: Secure container image storage and management for agent deployments
+* **Managed Identity**: Built-in Azure Managed Identity for secure, keyless authentication between services
+* **Infrastructure as Code**: Complete Bicep templates for repeatable, version-controlled deployments
 
 ## Getting Started
 
@@ -35,7 +46,7 @@ Open in Dev Containers
 6. Test using script/nlweb-demo/single_turn_conversation.py and send MCP tools/list request
    ```pwsh
    # create a python venv 
-   cd scripts\nlweb-demo
+   cd scripts/nlweb-demo
    pip install -r ./requirements.txt
    python ./single_turn_conversation.py
    ```
@@ -107,10 +118,6 @@ You may want to consider additional security measures, such as:
 
 - Enabling Microsoft Defender for Cloud to [secure your Azure resources](https://learn.microsoft.com/azure/defender-for-cloud/).
 - Protecting the Azure Container Apps instance with a [firewall](https://learn.microsoft.com/azure/container-apps/waf-app-gateway) and/or [Virtual Network](https://learn.microsoft.com/azure/container-apps/networking?tabs=workload-profiles-env%2Cazure-cli).
-
-> **Important Security Notice** <br/>
-This template, the application code and configuration it contains, has been built to showcase Microsoft Azure specific services and tools. We strongly advise our customers not to make this code part of their production environments without implementing or enabling additional security features.  <br/><br/>
-For a more comprehensive list of best practices and security recommendations for Intelligent Applications, [visit our official documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/).
 
 ### Resources
 
