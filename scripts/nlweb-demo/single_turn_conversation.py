@@ -11,7 +11,6 @@ DESCRIPTION:
 import os
 from azure.identity import DefaultAzureCredential
 from azure.ai.projects import AIProjectClient
-from azure.ai.agents.models import AgentReference
 from load_azd_env import load_azd_env
 
 load_azd_env()
@@ -41,8 +40,10 @@ with project_client:
     input_text = '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
     # input_text = '{"jsonrpc":"2.0","id":1,"method": "tools/call","params":{"name": "ask","arguments":{"query": "AI podcast"}}}'
 
+    print(f"Sending request: {input_text}")
+
     response = openai_client.responses.create(
         input=input_text,
-        extra_body={"agent": AgentReference(name=agent_name, version=agent_version).as_dict()}
+        extra_body={"agent": { "type": "agent_reference", "name": agent_name, "version": agent_version }}
     )
     print(f"Response status: {response.status}, text: {response.output_text}")

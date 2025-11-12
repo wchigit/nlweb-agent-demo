@@ -18,7 +18,7 @@ from langgraph.graph import StateGraph, END, MessagesState
 from langchain_core.messages import AIMessage
 from azure.ai.agentserver.langgraph import from_langgraph
 from nlweb_core.NLWebVectorDBRankingHandler import NLWebVectorDBRankingHandler
-from mcp_handler import MCPHandler
+from nlweb_core.mcp_handler import MCPHandler
 from output_response import OutputResponse
 from utils import is_json_rpc_message, extract_text 
 
@@ -58,7 +58,7 @@ async def run_nlweb_mcp(state: MessagesState) -> MessagesState:
     msg = extract_text(last_user_message)
 
     # Check if the message is JSON-RPC
-    mcp_handler = MCPHandler()
+    mcp_handler = MCPHandler(NLWebVectorDBRankingHandler)
     response_content = ""
     if is_json_rpc_message(msg):
         request_data = json.loads(msg)
@@ -80,8 +80,6 @@ async def run_nlweb_mcp(state: MessagesState) -> MessagesState:
             "messages": state["messages"] + [agent_response]
         }
 
-# env_path = Path(__file__).parent / ".env"
-# load_dotenv(dotenv_path=env_path)
 
 # Create the workflow graph
 workflow = StateGraph(MessagesState)
