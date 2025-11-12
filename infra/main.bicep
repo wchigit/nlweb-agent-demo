@@ -52,10 +52,6 @@ param principalId string = ''
 @description('Format of the chat model to deploy')
 @allowed(['Microsoft', 'OpenAI'])
 param agentModelFormat string = 'OpenAI'
-@description('Name of agent to deploy')
-param agentName string = 'agent-template-assistant'
-@description('(Deprecated) ID of agent to deploy')
-param aiAgentID string = ''
 @description('ID of the existing agent')
 param azureExistingAgentId string = ''
 @description('Name of the chat model to deploy')
@@ -123,8 +119,6 @@ var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = templateValidationMode? toLower(uniqueString(subscription().id, environmentName, location, seed)) :  toLower(uniqueString(subscription().id, environmentName, location))
 
 var tags = { 'azd-env-name': environmentName }
-
-var tempAgentID = !empty(aiAgentID) ? aiAgentID : ''
 
 var aiChatModel = [
   {
@@ -344,7 +338,6 @@ output AZURE_AI_EMBED_DEPLOYMENT_NAME string = embeddingDeploymentName
 output AZURE_AI_SEARCH_INDEX_NAME string = aiSearchIndexName
 output AZURE_AI_SEARCH_ENDPOINT string = searchServiceEndpoint
 output AZURE_AI_EMBED_DIMENSIONS string = embeddingDeploymentDimensions
-output AZURE_AI_AGENT_NAME string = agentName
 output AZURE_OPENAI_ENDPOINT string = aoaiEndpoint
 output ENABLE_AZURE_MONITOR_TRACING bool = enableAzureMonitorTracing
 output AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED bool = azureTracingGenAIContentRecordingEnabled
