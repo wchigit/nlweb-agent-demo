@@ -22,11 +22,11 @@
         }
     },
 
-	"remoteUser": "vscode"	
+	"remoteUser": "vscode",
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	 "postCreateCommand": "azd extension install azure.ai.agents"
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "pip3 install --user -r requirements.txt",
 }
