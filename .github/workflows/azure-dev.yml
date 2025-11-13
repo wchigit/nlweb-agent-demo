@@ -23,8 +23,6 @@ jobs:
 
       - uses: microsoft/template-validation-action@Latest
         id: validation
-        with:
-          useDevContainer: false
         env:
           TEMPLATE_VALIDATION_MODE: true
           RUN_LOAD_DATA: false
@@ -51,7 +49,6 @@ jobs:
       USE_APPLICATION_INSIGHTS: ${{ vars.USE_APPLICATION_INSIGHTS }}
       AZURE_AI_EMBED_MODEL_NAME: ${{ vars.AZURE_AI_EMBED_MODEL_NAME }}
       AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
-      AZURE_AI_SEARCH_INDEX_NAME: ${{ vars.AZURE_AI_SEARCH_INDEX_NAME }}
       AZURE_AI_AGENT_MODEL_VERSION: ${{ vars.AZURE_AI_AGENT_MODEL_VERSION }}
       AZURE_AI_AGENT_DEPLOYMENT_SKU: ${{ vars.AZURE_AI_AGENT_DEPLOYMENT_SKU }}
       AZURE_AI_EMBED_MODEL_FORMAT: ${{ vars.AZURE_AI_EMBED_MODEL_FORMAT }}
