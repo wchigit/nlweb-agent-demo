@@ -87,10 +87,10 @@
       "value": "${AZURE_AI_EMBED_MODEL_VERSION=1}"
     },
     "embedDeploymentSku": {
-      "value": "${AZURE_AI_EMBED_DEPLOYMENT_SKU=Standard}"
+      "value": "${AZURE_AI_EMBED_DEPLOYMENT_SKU=GlobalStandard}"
     },
     "embedDeploymentCapacity": {
-      "value": "${AZURE_AI_EMBED_DEPLOYMENT_CAPACITY=50}"
+      "value": "${AZURE_AI_EMBED_DEPLOYMENT_CAPACITY=10}"
     },
     "apiAppExists": {
       "value": "${SERVICE_API_RESOURCE_EXISTS=false}"
